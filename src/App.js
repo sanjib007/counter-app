@@ -20,6 +20,15 @@ class App extends Component {
     countersObj[index].value++;
     this.setState({ countersObj });
   };
+  onDecrement = counter => {
+    const countersObj = [...this.state.countersObj];
+    const index = countersObj.indexOf(counter);
+    countersObj[index] = { ...counter };
+    countersObj[index].value--;
+    if (countersObj[index].value >= 0) {
+      this.setState({ countersObj });
+    }
+  };
 
   handelDelete = counerId => {
     const counersCons = this.state.countersObj.filter(c => c.id !== counerId);
@@ -47,6 +56,7 @@ class App extends Component {
             countersObj={this.state.countersObj}
             onReset={this.resetHandeler}
             onIncrement={this.handIncrement}
+            onDecrement={this.onDecrement}
             onDelete={this.handelDelete}
           />
         </main>
